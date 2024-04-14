@@ -14,6 +14,8 @@ using namespace std;
 
 int main()
 {
+    #include "Graph.hpp" // Include the header file for the Graph class.
+
     ariel::Graph g;
     // 3x3 matrix that represents a connected graph.
     vector<vector<int>> graph = {
