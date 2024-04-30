@@ -8,12 +8,14 @@ namespace ariel {
         int n;
         std::vector<std::vector<int>> g;
         int edgecounter = 0;
+        int graphtype; // 0 = directed, 1 = undirected
 
     public:
 
         Graph(){
             this->n = 0;
             this->edgecounter = 0;
+            this->graphtype = 1;
         }
         void loadgraph(std::vector<std::vector<int>> graph) {
             if(graph.size() == 0){
@@ -26,31 +28,36 @@ namespace ariel {
             
             this->n = graph.size();
             this->g = graph;
-            for (unsigned long i = 0; i < n; i++) {
-                for (unsigned long j = 0; j < n; j++)
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
                 {
-                    if (g[i][j] != 0 && i!=j) {
-                        if(g[j][i] != g[i][j] && g[j][i] != 0){
-                            edgecounter+= 2;
-                            g[j][i] = 0;
-                            g[i][j] = 0;
-                        }
-                        if (g[j][i] == g[i][j] && g[j][i] != 0)
+                    if (graph[i][j] != 0 )
+                    {
+                        this->edgecounter++;
+                        if (graph[i][j] != graph[j][i])
                         {
-                            edgecounter++;
-                            g[j][i] = 0;
-                            g[i][j] = 0;
+                            this->graphtype = 0;
                         }
-                        else
-                            edgecounter++;
+                        
+                        
                     }
                 }
             }
-            this->g = graph;
+            if (this->graphtype == 1)
+            {
+                this->edgecounter = this->edgecounter / 2;
+            }
+            
+        
         }
 
         void printGraph() {
             std::cout << "Graph with " << n << " vertices and " << edgecounter << " edges." << std::endl;
+        }
+
+        int getN() {
+            return this->n;
         }
 
     };
