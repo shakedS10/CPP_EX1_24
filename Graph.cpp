@@ -1,23 +1,11 @@
 #include <iostream>
 #include <vector>
+#include "Graph.hpp"
+using namespace std;
+using namespace ariel;
 
-namespace ariel {
-    class Graph {
 
-    private:
-        int n;
-        std::vector<std::vector<int>> g;
-        int edgecounter = 0;
-        int graphtype; // 0 = directed, 1 = undirected
-
-    public:
-
-        Graph(){
-            this->n = 0;
-            this->edgecounter = 0;
-            this->graphtype = 1;
-        }
-        void loadgraph(std::vector<std::vector<int>> graph) {
+        void Graph::loadGraph(std::vector<std::vector<int>> graph) {
             if(graph.size() == 0){
                 throw std::invalid_argument("Graph is empty");
             }
@@ -28,9 +16,9 @@ namespace ariel {
             
             this->n = graph.size();
             this->g = graph;
-            for (int i = 0; i < n; i++)
+            for (size_t i = 0; i < n; i++)
             {
-                for (int j = 0; j < n; j++)
+                for (size_t j = 0; j < n; j++)
                 {
                     if (graph[i][j] != 0 )
                     {
@@ -51,14 +39,18 @@ namespace ariel {
             
         
         }
+        
 
-        void printGraph() {
+        void Graph::printGraph() {
             std::cout << "Graph with " << n << " vertices and " << edgecounter << " edges." << std::endl;
         }
 
-        int getN() {
+        size_t ariel::Graph::getN() {
             return this->n;
         }
 
-    };
-}
+        std::vector<std::vector<int>> ariel::Graph::getGraph() {
+            return this->g;
+        }
+
+
