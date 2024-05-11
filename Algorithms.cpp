@@ -16,15 +16,14 @@ using namespace ariel;
             bool isConnect = true;
             for(size_t i = 0; i < g.getN(); i++){
                 vector<bool> visited(g.getN(), false);
-                std::stack<size_t> st;
+                stack<size_t> st;
                 st.push(i);
                 visited[i] = true;
                 
                 while (!st.empty()) {
                     size_t node = st.top();
                     st.pop();
-                    
-                    // Visit all adjacent nodes of 'node'
+
                     for (size_t j = 0; j < g.getN(); ++j) {
                         if (g.getGraph()[node][j] != 0 && !visited[j]) {
                             st.push(j);
@@ -54,9 +53,9 @@ using namespace ariel;
             // If there is a negative cycle return "Negative cycle detected"
             // Else return the shortest path
             size_t n = g.getN();
-            std::vector<int> dist(n, INT_MAX);
+            vector<int> dist(n, INT_MAX);
             dist[src] = 0;
-            std::vector<int> parent(n, -1);        
+            vector<int> parent(n, -1);        
             for (size_t i = 0; i < n - 1; i++)
             {
                 for (size_t u = 0; u < n; u++)
@@ -87,7 +86,7 @@ using namespace ariel;
             }
             
             //reconstruct the path
-            std::string path = std::to_string(dest);
+            string path = std::to_string(dest);
             size_t temp = dest;
             while (parent[temp] != -1)
             {
@@ -104,6 +103,10 @@ using namespace ariel;
 
 
        bool Algorithms::isContainsCycle(Graph g) {
+        //different for directed and undirected
+        // for directed run dfs and if there is a back edge return true
+        // for undirected run dfs but there is no need to check 3 colors just check if the parent is not the current vertex
+        // the reason is because if the dfs finished on a vertex then it go colored black and already checked its entire component
         size_t n = g.getN();
         vector<int> color(n, 0);
         vector<size_t> parent(n,(size_t)-1);
@@ -181,6 +184,7 @@ using namespace ariel;
             //run dfs from all the vertex and mark all the vertices that are reachable with another temp array
             //color the vertexs with 2 colors if there is a color that cant be painted change isBipartite to false
             //return 0 or the 2 groups
+            //taught in algo 1 tirgul
             bool isBipartite = true;
             size_t n = g.getN();
             vector<int> color(n, -1);
@@ -190,13 +194,12 @@ using namespace ariel;
                 stack<size_t> st;
                 st.push(i);
                 visited[i] = true;
-                color[i] = 0; // Color the first vertex with 0
+                color[i] = 0; 
 
                 while (!st.empty()) {
                     size_t node = st.top();
                     st.pop();
 
-                    // Visit all adjacent nodes of 'node'
                     for (size_t j = 0; j < n; ++j) {
                         if (g.getGraph()[node][j] != 0) {
                             if (!visited[j]) {
@@ -213,9 +216,9 @@ using namespace ariel;
                 }
             }
             }
-            if(isBipartite){
-                std::vector<int> A;
-                std::vector<int> B;
+            if(isBipartite){ //building the 2 groups as specified in demo
+                vector<int> A;
+                vector<int> B;
                 for (size_t i = 0; i < g.getN(); i++)
                 {
                     if(color[i] == 0){
@@ -225,7 +228,7 @@ using namespace ariel;
                         B.push_back(i);
                     }
                 }
-                std:: string res = "The graph is bipartite: A={";
+                string res = "The graph is bipartite: A={";
                 for (size_t i = 0; i < A.size(); i++)
                 {
                     res += std::to_string(A[i]);
@@ -250,11 +253,12 @@ using namespace ariel;
         }
 
         std::string Algorithms::negativeCycle(Graph g){
-            
+            // Run bellman ford algorithm from 0 just to check if after n-1 relaxes the next one doesn't have impact
+            // If there is then there is a negative cycle return the cycle
             size_t n = g.getN();
-            std::vector<int> dist(n, INT_MAX);
+            vector<int> dist(n, INT_MAX);
             dist[0] = 0;
-            std::vector<int> parent(n, -1);        
+            vector<int> parent(n, -1);        
             for (size_t i = 0; i < n - 1; i++)
             {
                 for (size_t u = 0; u < n; u++)
