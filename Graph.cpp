@@ -13,7 +13,8 @@ using namespace ariel;
             {
                 throw std::invalid_argument("Graph is not a square matrix");
             }
-            
+            this->edgecounter = 0;
+            this->graphtype = 1;
             this->n = graph.size();
             this->g = graph;
             for (size_t i = 0; i < n; i++)
@@ -32,10 +33,10 @@ using namespace ariel;
                     }
                 }
             }
-            if (this->graphtype == 1)
-            {
-                this->edgecounter = this->edgecounter / 2;
-            }
+            // if (this->graphtype == 1)
+            // {
+            //     this->edgecounter = this->edgecounter / 2;
+            // }
             
         
         }

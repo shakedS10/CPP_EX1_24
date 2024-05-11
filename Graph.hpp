@@ -24,6 +24,9 @@ namespace ariel {
         void printGraph();
         size_t getN();
         std::vector<std::vector<int>> getGraph();
+        int getgraphtype(){
+            return this->graphtype;
+        }
     };
 }
 
