@@ -1,29 +1,16 @@
-# מטלה 1 - גרפים (Classes and Namespaces)
+//214695108 shakedshvartz2004@gmail.com
 
-המטרה שלכם במטלה הזאת היא ליצור מחלקה שמייצגת גרף ולממש אלגוריתמים על הגרפים (זה הזמן להזכר בקורס אלגוריתמים 1).
+This program implements what algorithms we've learned in algo 1 using cpp
+there are 5 algorithms:
 
-במטלה הזאת הייצוג של הגרף שלכם יתבצע בעזרת מטריצת שכנויות - https://he.wikipedia.org/wiki/%D7%9E%D7%98%D7%A8%D7%99%D7%A6%D7%AA_%D7%A9%D7%9B%D7%A0%D7%95%D7%AA.
+isConnected - Checks if the graph is a strong connected graph i.e from every vertex there exists a path to every vertex.
 
-הגרף יכול להיות גרף מכוון ולא מכוון וגם גרף ממושקל. מטריצת השכנויות חייבת להיות מטריצה ריבועית.
+shortestPath - Runs Bellman-Ford on the graph which relaxes the edges n-1 times and updates using the relax the prev vertex in the shortest path.
 
-עליכם לכתוב את הקבצים הבאים:
+isContainsCycle - uses dfs in a recursive way to find a backedge and prints the cycle if found. the recursive part works differently for directed or undirected as if the graph is undirected there is no need for 3 colors only checking if it's not a direct egde to the parent.
 
-```
-Graph.cpp
-Algorithms.cpp
-```
+isBipartite - uses dfs to color the graph in 2 colors in such way that a vertex can't have the same color as his parent, if it found a vertex with the same color as his parent return false. else consturct the string output as 2 groups.
 
-הקובץ `Graph.cpp` מכיל מחלקה המייצגת גרף.
-המחלקה מכילה את הפעולות `loadGraph` המקבלת מטריצת שכנויות וטוענת אותה לתוך הגרף ו-`printGraph` שמדפיסה את הייצוג של הגרף (הפורמט לבחירתכם, ראו דוגמה ב-`Demo.cpp`).
+negativeCycle - uses the idea of Bellman-Ford relaxes n-1 times amd if another relax has impact then there is a negative cycle (proven in algo 1).
 
-הקובץ `Algorithms.cpp` מכיל מימושים לאלגוריתמים על גרפים. ביניהם:
-
-- `isConnected(g)` - האלגוריתם מקבל גרף ומחזיר 1 אם הגרף קשיר (אחרת מחזיר 0).
-- `shortestPath(g,start,end)` - האלגוריתם מקבל גרף, קודקוד התחלה וקודקוד סיום ומחזיר את המסלול הקל ביותר (במקרה שהגרף לא ממושקל - הקצר ביותר) בין שני הקודקודים. במידה ואין מסלול כזה, האלגוריתם יחזיר -1.
-- `isContainsCycle(g)` - האלגוריתם מקבל גרף ומדפיס מעגל כלשהו. אם לא קיים מעגל בגרף, האלגוריתם יחזיר 0.
-- `isBipartite(g)` - האלגוריתם מקבל גרף ומחזיר את החלוקה של הגרף לגרף דו-צדדי. אם אי אפשר לחלק את הגרף, האלגוריתם יחזיר 0.
-- `negativeCycle(g)` - האלגוריתם מקבל גרף ומוצא מעגל שלילי (כלומר מעגל שסכום המשקלים של הצלעות שלילי). אם לא קיים מעגל כזה, האלגוריתם ידפיס שלא קיים מעגל שלילי.
-
-הקובץ `Demo.cpp` מכיל דוגמאות של קלטים ופלטים.
-עליכם לכתוב בתחילת כל קובץ את מספר תעודת הזהות שלכם ואת המייל. כמו כן, בנוסף לקבצים של המטלה אתם נדרשים להגיש גם קובץ README המתאר את אופן המימוש ואת החלוקה שביצעתם בקוד (סוג של מדריך משתמש). אי עמידה בהנחיות תגרור הפחתה בציון. בהצלחה!
-  
+To use this program type in the teminal make and use ./(test/demo) to run what you want. demo is mainly for examples some of the comments in the demo are incorrect, the tests are more precise and check if the program run as expected.
