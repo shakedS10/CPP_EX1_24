@@ -1,8 +1,4 @@
-/*
- * Demo program for Exercise 2.
- * Author: Benjamin Saldman.
- */
-
+//214695108 shakedshvartz2004@gmail.com
 #include "Graph.hpp"
 #include "Algorithms.hpp"
 using ariel::Algorithms;
