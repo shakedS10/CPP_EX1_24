@@ -21,11 +21,11 @@ using namespace ariel;
                 visited[i] = true;
                 
                 while (!st.empty()) {
-                    size_t node = st.top();
+                    size_t par = st.top();
                     st.pop();
 
                     for (size_t j = 0; j < g.getN(); ++j) {
-                        if (g.getGraph()[node][j] != 0 && !visited[j]) {
+                        if (g.getGraph()[par][j] != 0 && !visited[j]) {
                             st.push(j);
                             visited[j] = true;
                         }
@@ -197,17 +197,17 @@ using namespace ariel;
                 color[i] = 0; 
 
                 while (!st.empty()) {
-                    size_t node = st.top();
+                    size_t par = st.top();
                     st.pop();
 
                     for (size_t j = 0; j < n; ++j) {
-                        if (g.getGraph()[node][j] != 0) {
-                            if (!visited[j]) {
+                        if (g.getGraph()[par][j] != 0) {
+                            if (!visited[j]) { //if not visited color opposite of parent
                                 st.push(j);
                                 visited[j] = true;
-                                color[j] = 1 - color[node];
+                                color[j] = 1 - color[par];
                         } 
-                        else if (color[j] == color[node]) {
+                        else if (color[j] == color[par]) { //if visited and same color then not bipartite
                                 isBipartite = false;
                                 break;
                         }
@@ -219,6 +219,7 @@ using namespace ariel;
             if(isBipartite){ //building the 2 groups as specified in demo
                 vector<int> A;
                 vector<int> B;
+                string str = "The graph is bipartite: ";
                 for (size_t i = 0; i < g.getN(); i++)
                 {
                     if(color[i] == 0){
@@ -228,24 +229,27 @@ using namespace ariel;
                         B.push_back(i);
                     }
                 }
-                string res = "The graph is bipartite: A={";
+                str += "A={";
                 for (size_t i = 0; i < A.size(); i++)
                 {
-                    res += std::to_string(A[i]);
+                    str += std::to_string(A[i]);
                     if(i != A.size() - 1){
-                        res += ", ";
+                        str += ", ";
                     }
                 }
-                res += "}, B={";
+                str += "}, ";
+
+
+                str += "B={";
                 for (size_t i = 0; i < B.size(); i++)
                 {
-                    res += std::to_string(B[i]);
+                    str += std::to_string(B[i]);
                     if(i != B.size() - 1){
-                        res += ", ";
+                        str += ", ";
                     }
                 }
-                res += "}";
-                return res;
+                str += "}";
+                return str;
             }
             else{
                 return "0";

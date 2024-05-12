@@ -33,11 +33,6 @@ using namespace ariel;
                     }
                 }
             }
-            // if (this->graphtype == 1)
-            // {
-            //     this->edgecounter = this->edgecounter / 2;
-            // }
-            
         
         }
         
