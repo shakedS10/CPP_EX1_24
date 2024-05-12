@@ -3,7 +3,7 @@
 This program implements what algorithms we've learned in algo 1 using cpp
 there are 5 algorithms:
 
-isConnected - Checks if the graph is a strong connected graph i.e from every vertex there exists a path to every vertex.
+isConnected - Checks if the graph is a strong connected graph i.e from every vertex there exists a path to every vertex, uses dfs to check.
 
 shortestPath - Runs Bellman-Ford on the graph which relaxes the edges n-1 times and updates using the relax the prev vertex in the shortest path.
 
